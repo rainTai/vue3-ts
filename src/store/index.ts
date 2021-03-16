@@ -1,8 +1,9 @@
 import { createStore } from "vuex";
-import { defaultMaxListeners } from "events";
 
 const store = createStore({
-  state: {},
+  state: {
+    name:"zhuda"
+  },
   mutations: {},
   actions: {},
   modules: {},

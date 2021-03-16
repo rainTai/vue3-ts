@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, inject, onMounted } from "vue";
+import { ref, defineComponent, inject, onMounted, onBeforeUnmount } from "vue";
 export default defineComponent({
   name: "HelloWorld",
   props: {
@@ -17,12 +17,19 @@ export default defineComponent({
   },
   setup: () => {
     const count = ref(0);
-    let ECHARTS:any = inject("ec");
-    let THREE:any = inject("tr");
+    let ECHARTS: any = inject("ec");
+    let THREE: any = inject("tr");
+    let render:any = null;
     onMounted(() => {
       initCharts();
       initThree();
     });
+    onBeforeUnmount(() => {
+      destoryThree();
+    });
+    const destoryThree = function () {
+      document.body.removeChild(render);
+    };
     const initThree = function () {
       var scence = new THREE.Scene();
       var camera = new THREE.PerspectiveCamera(
@@ -33,7 +40,8 @@ export default defineComponent({
       );
       var renderer = new THREE.WebGLRenderer();
       renderer.setSize(window.innerWidth, window.innerHeight);
-      document.body.appendChild(renderer.domElement);
+      render = renderer.domElement;
+      document.body.appendChild(render);
 
       var geometry = new THREE.BoxGeometry(1, 1, 1);
       var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });

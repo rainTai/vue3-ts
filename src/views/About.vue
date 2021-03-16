@@ -2,11 +2,14 @@
   <div>
     about
     <el-button>my button</el-button>
+    <!-- {{name}} -->
+    {{ name1 }}
   </div>
 </template>
 
 <script lang="ts">
 import { ref, defineComponent } from "vue";
+import { useStore } from "vuex";
 export default defineComponent({
   name: "HelloWorld",
   props: {
@@ -17,10 +20,12 @@ export default defineComponent({
   },
   setup: () => {
     const count = ref(0);
-    const option = {
-      
-    }
-    return { count,option };
+    const store = useStore();
+    const name: string = ref(store.state.name);
+    const name1: string = store.state.name;
+    console.log(store.state);
+    const option = {};
+    return { count, name, name1, option };
   },
 });
 </script>

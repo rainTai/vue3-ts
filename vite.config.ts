@@ -1,13 +1,11 @@
-import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 const path = require("path");
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import { viteMockServe } from "vite-plugin-mock";
 const fs = require("fs");
 
 // https://vitejs.dev/config/
 const config ={
-  plugins: [vue(), vueJsx(), viteMockServe({ supportTs: false })],
+  plugins: [vue(), vueJsx(), ],
   resolve: {
     alias: {
       // 键必须以斜线开始和结束
