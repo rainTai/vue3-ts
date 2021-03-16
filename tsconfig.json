@@ -10,6 +10,8 @@
     "esModuleInterop": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "noImplicitAny": false, //为 false 时，如果编译器无法根据变量的使用来判断类型时，将用 any 类型代替。为 true 时，进行强类型检查，会报错。
+//重新运行项目,你就会发现没有报错了
     "experimentalDecorators": true,
     "lib": ["esnext", "dom"],
     "types": ["vite/client","node"],

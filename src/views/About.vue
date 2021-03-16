@@ -2,15 +2,11 @@
   <div>
     about
     <el-button>my button</el-button>
-    <ECharts ref="chart" :option="option" />
   </div>
 </template>
 
 <script lang="ts">
 import { ref, defineComponent } from "vue";
-import * as echarts from 'echarts';
-import { h } from 'vue';
-import { createComponent } from 'echarts-for-vue'
 export default defineComponent({
   name: "HelloWorld",
   props: {
@@ -18,9 +14,6 @@ export default defineComponent({
       type: String,
       required: true,
     },
-  },
-  components:{
-    ECharts:createComponent({echarts,h})
   },
   setup: () => {
     const count = ref(0);

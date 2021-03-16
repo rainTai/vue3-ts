@@ -2,12 +2,15 @@
   <div>
     <router-link to="/">(🍉 ) => Home</router-link>
     <router-link to="/about">(🌽 ) => About</router-link>
+    <router-link to="/test">(🌽 ) => test</router-link>
     <router-view />
   </div>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from "vue";
+import { ref, defineComponent, provide } from "vue";
+import * as echarts from "echarts";
+import * as three from "three";
 export default defineComponent({
   name: "HelloWorld",
   props: {
@@ -17,6 +20,8 @@ export default defineComponent({
     },
   },
   setup: () => {
+    provide("ec", echarts);
+    provide("tr", three);
     const count = ref(0);
     return { count };
   },
