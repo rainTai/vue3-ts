@@ -3,16 +3,42 @@ import vue from "@vitejs/plugin-vue";
 const path = require("path");
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { viteMockServe } from "vite-plugin-mock";
-const dotenv = require("dotenv")
-const fs = require("fs")
+const fs = require("fs");
 
 // https://vitejs.dev/config/
-export default defineConfig({
+const config ={
   plugins: [vue(), vueJsx(), viteMockServe({ supportTs: false })],
   resolve: {
     alias: {
       // 键必须以斜线开始和结束
       "@": path.resolve(__dirname, "src"),
     },
-  }
-});
+  },
+  // base:'/',
+  // publicDir:"/",
+  server:{
+    proxy:{
+      // 简写
+      // '/foo': 'http://localhost:4567/foo',
+      // 配置
+      // '/api': {
+      //   target: 'http://jsonplaceholder.typicode.com',
+      //   changeOrigin: true,  是否切换源
+      //   rewrite: (path) => path.replace(/^\/api/, '')  /api是否换成“”
+      // },
+      // 正则配置
+      '^/fallback/.*': {
+        target: 'http://jsonplaceholder.typicode.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/fallback/, '')
+      }
+    },
+    cors:false,  //是否跨域,
+    force:false  //编译前捆绑插件
+  },
+  optimizeDeps: {
+    include: ['echarts']
+  },
+}
+
+export default config

@@ -1,7 +1,8 @@
 <template>
   <div>
-   176235481724
-   <img src="@/assets/people.jpg" alt="" style="width:200px;height:200px;">
+    <router-link to="/">(🍉 ) => Home</router-link>
+    <router-link to="/about">(🌽 ) => About</router-link>
+    <router-view />
   </div>
 </template>
 

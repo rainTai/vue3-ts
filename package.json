@@ -2,12 +2,14 @@
   "name": "vite-project",
   "version": "0.0.0",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development vite",
+    "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "echarts": "^5.0.2",
+    "echarts-for-vue": "^1.1.1",
     "element3": "0.0.39",
     "mockjs": "^1.1.0",
     "vue": "^3.0.5",
