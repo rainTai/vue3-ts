@@ -3,14 +3,18 @@
     <router-link to="/">(🍉 ) => Home</router-link>
     <router-link to="/about">(🌽 ) => About</router-link>
     <router-link to="/test">(🌽 ) => test</router-link>
+    <el-button @click="jumpGossip">Gossip</el-button>
     <router-view />
   </div>
 </template>
 
 <script lang="ts">
 import { ref, defineComponent, provide } from "vue";
+import { useRoute, useRouter } from "vue-router";
+
 import * as echarts from "echarts";
 import * as three from "three";
+import router from "./router";
 export default defineComponent({
   name: "HelloWorld",
   props: {
@@ -23,7 +27,15 @@ export default defineComponent({
     provide("ec", echarts);
     provide("tr", three);
     const count = ref(0);
-    return { count };
+    // const route = useRoute();
+    const router = useRouter();
+
+    function jumpGossip() {
+      router.push({
+        path: "/gossip",
+      });
+    }
+    return { count, jumpGossip };
   },
 });
 </script>
