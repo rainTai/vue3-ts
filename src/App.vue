@@ -9,9 +9,8 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, provide } from "vue";
+import { ref, defineComponent, onMounted, provide } from "vue";
 import { useRoute, useRouter } from "vue-router";
-
 import * as echarts from "echarts";
 import * as three from "three";
 import router from "./router";
@@ -27,9 +26,10 @@ export default defineComponent({
     provide("ec", echarts);
     provide("tr", three);
     const count = ref(0);
-    // const route = useRoute();
-    const router = useRouter();
 
+    console.log(three, "kk");
+    const router = useRouter();
+    onMounted(() => {});
     function jumpGossip() {
       router.push({
         path: "/gossip",

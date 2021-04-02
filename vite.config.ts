@@ -4,8 +4,8 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 const fs = require("fs");
 
 // https://vitejs.dev/config/
-const config ={
-  plugins: [vue(), vueJsx(), ],
+const config = {
+  plugins: [vue(), vueJsx()],
   resolve: {
     alias: {
       // 键必须以斜线开始和结束
@@ -14,8 +14,8 @@ const config ={
   },
   // base:'/',
   // publicDir:"/",
-  server:{
-    proxy:{
+  server: {
+    proxy: {
       // 简写
       // '/foo': 'http://localhost:4567/foo',
       // 配置
@@ -25,18 +25,18 @@ const config ={
       //   rewrite: (path) => path.replace(/^\/api/, '')  /api是否换成“”
       // },
       // 正则配置
-      '^/fallback/.*': {
-        target: 'http://jsonplaceholder.typicode.com',
+      "^/fallback/.*": {
+        target: "http://jsonplaceholder.typicode.com",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/fallback/, '')
-      }
+        rewrite: (path) => path.replace(/^\/fallback/, ""),
+      },
     },
-    cors:false,  //是否跨域,
-    force:false  //编译前捆绑插件
+    cors: false, //是否跨域,
+    force: false, //编译前捆绑插件
   },
   optimizeDeps: {
-    include: ['echarts']
+    include: ["echarts", "three",'three/examples/js/controls/OrbitControls'],
   },
-}
+};
 
-export default config
+export default config;

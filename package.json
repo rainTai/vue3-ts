@@ -9,6 +9,7 @@
   "dependencies": {
     "@types/three": "^0.126.1",
     "axios": "^0.21.1",
+    "camera-controls": "^1.28.0",
     "echarts": "^5.0.2",
     "element3": "0.0.39",
     "mockjs": "^1.1.0",
