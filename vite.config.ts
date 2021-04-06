@@ -1,11 +1,12 @@
 import vue from "@vitejs/plugin-vue";
 const path = require("path");
 import vueJsx from "@vitejs/plugin-vue-jsx";
+// import { OrbitControls } from "three/examples/js/controls/OrbitControls";
 const fs = require("fs");
 
 // https://vitejs.dev/config/
 const config ={
-  plugins: [vue(), vueJsx(), ],
+  plugins: [vue(), vueJsx() ],
   resolve: {
     alias: {
       // 键必须以斜线开始和结束

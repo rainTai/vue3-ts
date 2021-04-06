@@ -1,0 +1,55 @@
+diff --git a/node_modules/three/examples/js/controls/OrbitControls.js b/node_modules/three/examples/js/controls/OrbitControls.js
+index 54a09ef..0602df4 100644
+--- a/node_modules/three/examples/js/controls/OrbitControls.js
++++ b/node_modules/three/examples/js/controls/OrbitControls.js
+@@ -4,7 +4,6 @@
+ //    Orbit - left mouse / touch: one-finger move
+ //    Zoom - middle mouse, or mousewheel / touch: two-finger spread or squish
+ //    Pan - right mouse, or left mouse + ctrl/meta/shiftKey, or arrow keys / touch: two-finger move
+-
+ THREE.OrbitControls = function ( object, domElement ) {
+ 
+ 	if ( domElement === undefined ) console.warn( 'THREE.OrbitControls: The second parameter "domElement" is now mandatory.' );
+diff --git a/node_modules/three/src/Three.Legacy.js b/node_modules/three/src/Three.Legacy.js
+index f448eea..019b15f 100644
+--- a/node_modules/three/src/Three.Legacy.js
++++ b/node_modules/three/src/Three.Legacy.js
+@@ -82,6 +82,8 @@ import { ImageUtils } from './extras/ImageUtils.js';
+ import { Shape } from './extras/core/Shape.js';
+ import { CubeCamera } from './cameras/CubeCamera.js';
+ import { Scene } from './scenes/Scene.js';
++import {OrbitControls} from "../examples/js/controls/OrbitControls";
++import {MapControls } from "../examples/js/controls/OrbitControls"
+  
+ export { MathUtils as Math };
+ 
+@@ -91,6 +93,10 @@ export const NoColors = 0;
+ export const FaceColors = 1;
+ export const VertexColors = 2;
+ 
++export function OrbitControls()
++export function MapControls();
++
++
+ export function MeshFaceMaterial( materials ) {
+ 
+ 	console.warn( 'THREE.MeshFaceMaterial has been removed. Use an Array instead.' );
+diff --git a/node_modules/three/src/Three.js b/node_modules/three/src/Three.js
+index 7e3bb3e..1acf2b6 100644
+--- a/node_modules/three/src/Three.js
++++ b/node_modules/three/src/Three.js
+@@ -1,5 +1,6 @@
+ import { REVISION } from './constants.js';
+ 
++
+ export { WebGLMultisampleRenderTarget } from './renderers/WebGLMultisampleRenderTarget.js';
+ export { WebGLCubeRenderTarget } from './renderers/WebGLCubeRenderTarget.js';
+ export { WebGLRenderTarget } from './renderers/WebGLRenderTarget.js';
+@@ -151,6 +152,7 @@ export { ImageUtils } from './extras/ImageUtils.js';
+ export { ShapeUtils } from './extras/ShapeUtils.js';
+ export { PMREMGenerator } from './extras/PMREMGenerator.js';
+ export { WebGLUtils } from './renderers/webgl/WebGLUtils.js';
++
+ export * from './constants.js';
+ export * from './Three.Legacy.js';
+ 

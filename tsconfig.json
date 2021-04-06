@@ -22,6 +22,6 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "src/App.jsx"
-  ],
+, "window.d.ts"  ],
   "exclude":["node_modules","dist"]
 }

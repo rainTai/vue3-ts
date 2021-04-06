@@ -18,44 +18,44 @@ export default defineComponent({
   setup: () => {
     const count = ref(0);
     let ECHARTS: any = inject("ec");
-    let THREE: any = inject("tr");
-    let render:any = null;
+    // let THREE: any = inject("tr");
+    // let render:any = null;
     onMounted(() => {
       initCharts();
-      initThree();
+      // initThree();
     });
     onBeforeUnmount(() => {
       destoryThree();
     });
     const destoryThree = function () {
-      document.body.removeChild(render);
+      // document.body.removeChild(render);
     };
-    const initThree = function () {
-      var scence = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera(
-        75,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-      );
-      var renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      render = renderer.domElement;
-      document.body.appendChild(render);
+    // const initThree = function () {
+      // var scence = new THREE.Scene();
+    //   var camera = new THREE.PerspectiveCamera(
+    //     75,
+    //     window.innerWidth / window.innerHeight,
+    //     0.1,
+    //     1000
+    //   );
+    //   var renderer = new THREE.WebGLRenderer();
+    //   renderer.setSize(window.innerWidth, window.innerHeight);
+    //   render = renderer.domElement;
+    //   document.body.appendChild(render);
 
-      var geometry = new THREE.BoxGeometry(1, 1, 1);
-      var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-      var cube = new THREE.Mesh(geometry, material);
-      scence.add(cube);
-      camera.position.z = 5;
-      var animate = function () {
-        requestAnimationFrame(animate);
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-        renderer.render(scence, camera);
-      };
-      animate();
-    };
+    //   var geometry = new THREE.BoxGeometry(1, 1, 1);
+    //   var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    //   var cube = new THREE.Mesh(geometry, material);
+    //   scence.add(cube);
+    //   camera.position.z = 5;
+    //   var animate = function () {
+    //     requestAnimationFrame(animate);
+    //     cube.rotation.x += 0.01;
+    //     cube.rotation.y += 0.01;
+    //     renderer.render(scence, camera);
+    //   };
+    //   animate();
+    // };
     const initCharts = function () {
       let myChart = ECHARTS.init(document.getElementById("lineChart"));
       myChart.setOption({

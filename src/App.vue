@@ -13,7 +13,8 @@ import { ref, defineComponent, provide } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import * as echarts from "echarts";
-import * as three from "three";
+// import * as THREE from "three";
+// import { OrbitControls } from "three/examples/js/controls/OrbitControls";
 import router from "./router";
 export default defineComponent({
   name: "HelloWorld",
@@ -24,8 +25,10 @@ export default defineComponent({
     },
   },
   setup: () => {
+    // THREE.OrbitControls = OrbitControls
+    // console.log(OrbitControls,"akaka");
     provide("ec", echarts);
-    provide("tr", three);
+    // provide("tr", THREE);
     const count = ref(0);
     // const route = useRoute();
     const router = useRouter();
