@@ -9,9 +9,8 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, provide } from "vue";
+import { ref, defineComponent, onMounted, provide } from "vue";
 import { useRoute, useRouter } from "vue-router";
-
 import * as echarts from "echarts";
 // import * as THREE from "three";
 // import { OrbitControls } from "three/examples/js/controls/OrbitControls";
@@ -30,9 +29,10 @@ export default defineComponent({
     provide("ec", echarts);
     // provide("tr", THREE);
     const count = ref(0);
-    // const route = useRoute();
-    const router = useRouter();
 
+    console.log(three, "kk");
+    const router = useRouter();
+    onMounted(() => {});
     function jumpGossip() {
       router.push({
         path: "/gossip",
