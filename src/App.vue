@@ -12,7 +12,8 @@
 import { ref, defineComponent, onMounted, provide } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import * as echarts from "echarts";
-import * as three from "three";
+// import * as THREE from "three";
+// import { OrbitControls } from "three/examples/js/controls/OrbitControls";
 import router from "./router";
 export default defineComponent({
   name: "HelloWorld",
@@ -24,10 +25,8 @@ export default defineComponent({
   },
   setup: () => {
     provide("ec", echarts);
-    provide("tr", three);
     const count = ref(0);
 
-    console.log(three, "kk");
     const router = useRouter();
     onMounted(() => {});
     function jumpGossip() {
