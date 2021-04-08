@@ -23,6 +23,7 @@ export default defineComponent({
     // 挂载节点
     let realNodes: any;
     let renderer: any = null;
+    let flag = 3; //切换先后天八卦
     // @ts-ignore //注释这个引用报错
     const THREE = window.THREE;
     //挂载时
@@ -32,13 +33,19 @@ export default defineComponent({
     });
     //卸载时
     onBeforeUnmount(() => {
-      realNodes.remove(renderer);
+      delThree();
     });
-    function change(type){
-      if(type === 1){
-        console.log(1)
-      }else if(type === 2){
-        console.log(2)
+
+    function delThree() {
+      realNodes.remove(renderer);
+    }
+    function change(type) {
+      if (type === 1) {
+        console.log(1);
+        flag = type;
+      } else if (type === 2) {
+        console.log(2);
+        flag = type;
       }
     }
 
@@ -65,7 +72,6 @@ export default defineComponent({
         -50,
         -50,
         -50, //先天坤卦坐标
-
         -50,
         -50,
         50, //先天艮卦坐标
@@ -108,255 +114,238 @@ export default defineComponent({
       scene.add(line);
       scene.add(point);
 
+      const nameStr = "乾兑离震巽坎艮坤";
+      const positionList = [
+        [50, 50, 50],
+        [50, 50, -50],
+        [50, -50, 50],
+        [50, -50, -50],
+        [-50, 50, 50],
+        [-50, 50, -50],
+        [-50, -50, 50],
+        [-50, -50, -50],
+      ];
+      const nameStr2 = "坎坤震巽吾乾兑艮离";
+      const positionList2 = [
+        [-50, -50, -50],
+        [-50, -50, 50],
+        [-50, 50, -50],
+        [-50, 50, 50],
+        [0, 0, 0],
+        [50, -50, -50],
+        [50, -50, 50],
+        [50, 50, -50],
+        [50, 50, 50],
+      ];
+      const nameStr3 = "12345678";
+      const positionList3 = [
+       [50, 50, 50],
+        [50, 50, -50],
+        [50, -50, 50],
+        [50, -50, -50],
+        [-50, 50, 50],
+        [-50, 50, -50],
+        [-50, -50, 50],
+        [-50, -50, -50],
+      ];
+      const nameStr4 = "123456789";
+      const positionList4 = [
+        [-50, -50, -50],
+        [-50, -50, 50],
+        [-50, 50, -50],
+        [-50, 50, 50],
+        [0, 0, 0],
+        [50, -50, -50],
+        [50, -50, 50],
+        [50, 50, -50],
+        [50, 50, 50],
+      ];
       var loader = new THREE.FontLoader(); //开始创建文字
+
       loader.load(
         "src/three/examples/fonts/STSong_Regular.json",
         function (font) {
-          //上面导入了optimer_regular.typeface.json
-          var new_text = new THREE.TextGeometry("乾", {
-            font: font,
-            size: 10,
-            height: 0.3,
-          });
-          var material_text = new THREE.MeshLambertMaterial({
-            color: 0x9933ff,
-          });
-          /*
-            定义可以反光的材料, 
-            也可以使用MeshBasicMeterial, 
-            只是对光源无效
-            0x9933FF是十六进制颜色名
-            */
-          var text_1 = new THREE.Mesh(new_text, material_text);
-          //创建文字
-          scene.add(text_1);
-          //添加文字
-          text_1.position.z = 50;
-          text_1.position.y = 50;
-          text_1.position.x = 50;
+          if (flag === 1) {
+            positionList.forEach((item, index) => {
+              let text = new THREE.TextGeometry(nameStr[index], {
+                font: font,
+                size: 10,
+                height: 0.3,
+              });
+              let material = new THREE.MeshLambertMaterial({
+                color: 0x9933ff,
+              });
+              let mesh_text = new THREE.Mesh(text, material);
+              //添加位置
+              mesh_text.position.set(...item);
+              mesh_text.name = nameStr[index];
+              //创建文字
+              scene.add(mesh_text);
+            });
+          } else if (flag === 2) {
+            positionList2.forEach((item, index) => {
+              let text = new THREE.TextGeometry(nameStr2[index], {
+                font: font,
+                size: 10,
+                height: 0.3,
+              });
+              let material = new THREE.MeshLambertMaterial({
+                color: 0x9933ff,
+              });
+              let mesh_text = new THREE.Mesh(text, material);
+              //添加位置
+              mesh_text.position.set(...item);
+              mesh_text.name = nameStr2[index];
+              //创建文字
+              scene.add(mesh_text);
+            });
+          }else if (flag === 3) {
+            positionList3.forEach((item, index) => {
+              let text = new THREE.TextGeometry(nameStr3[index], {
+                font: font,
+                size: 10,
+                height: 0.3,
+              });
+              let material = new THREE.MeshLambertMaterial({
+                color: 0x9933ff,
+              });
+              let mesh_text = new THREE.Mesh(text, material);
+              //添加位置
+              mesh_text.position.set(...item);
+              mesh_text.name = nameStr3[index];
+              //创建文字
+              scene.add(mesh_text);
+            });
+          }else if (flag === 4) {
+            positionList4.forEach((item, index) => {
+              let text = new THREE.TextGeometry(nameStr4[index], {
+                font: font,
+                size: 10,
+                height: 0.3,
+              });
+              let material = new THREE.MeshLambertMaterial({
+                color: 0x9933ff,
+              });
+              let mesh_text = new THREE.Mesh(text, material);
+              //添加位置
+              mesh_text.position.set(...item);
+              mesh_text.name = nameStr4[index];
+              //创建文字
+              scene.add(mesh_text);
+            });
+          }
         }
       );
 
-      var loader = new THREE.FontLoader(); //开始创建文字
-      loader.load(
-        "src/three/examples/fonts/STSong_Regular.json",
-        function (font) {
-          //上面导入了optimer_regular.typeface.json
-          var new_text = new THREE.TextGeometry("兑", {
-            font: font,
-            size: 10,
-            height: 0.3,
-            /*
-                这里只定义了最基本的参数
-                还有其他的参数
-                font: THREE.Font的实例
-                size: Float, 字体大小, 默认值为100
-                height: Float, 挤出文本的厚度。默认值为50
-                curveSegments: Integer, (表示文本的)曲线上点的数量，默认值为12
-                bevelEnabled: Boolean, 是否开启斜角，默认为false
-                bevelThickness: Float, 文本上斜角的深度，默认值为20
-                bevelSize: Float, 斜角与原始文本轮廓之间的延伸距离, 默认值为8
-                bevelSegments: Integer, 斜角的分段数, 默认值为3
-                */
-          });
-          var material_text = new THREE.MeshLambertMaterial({
-            color: 0x9933ff,
-          });
-          /*
-            定义可以反光的材料, 
-            也可以使用MeshBasicMeterial, 
-            只是对光源无效
-            0x9933FF是十六进制颜色名
-            */
-          var text_1 = new THREE.Mesh(new_text, material_text);
-          //创建文字
-          scene.add(text_1);
-          //添加文字
-          text_1.position.z = -50;
-          text_1.position.y = 50;
-          text_1.position.x = 50;
-        }
-      );
+      // var loader = new THREE.FontLoader(); //开始创建文字
+      // loader.load(
+      //   "src/three/examples/fonts/STSong_Regular.json",
+      //   function (font) {
+      //     //上面导入了optimer_regular.typeface.json
+      //     var new_text = new THREE.TextGeometry("巽", {
+      //       font: font,
+      //       size: 10,
+      //       height: 0.3,
+      //     });
+      //     var material_text = new THREE.MeshLambertMaterial({
+      //       color: 0x9933ff,
+      //     });
+      //     /*
+      //       定义可以反光的材料,
+      //       也可以使用MeshBasicMeterial,
+      //       只是对光源无效
+      //       0x9933FF是十六进制颜色名
+      //       */
+      //     var text_1 = new THREE.Mesh(new_text, material_text);
+      //     //创建文字
+      //     scene.add(text_1);
+      //     //添加文字
+      //     text_1.position.z = 50;
+      //     text_1.position.y = 50;
+      //     text_1.position.x = -50;
+      //   }
+      // );
 
-      var loader = new THREE.FontLoader(); //开始创建文字
-      loader.load(
-        "src/three/examples/fonts/STSong_Regular.json",
-        function (font) {
-          //上面导入了optimer_regular.typeface.json
-          var new_text = new THREE.TextGeometry("离", {
-            font: font,
-            size: 10,
-            height: 0.3,
-            /*
-                这里只定义了最基本的参数
-                还有其他的参数
-                font: THREE.Font的实例
-                size: Float, 字体大小, 默认值为100
-                height: Float, 挤出文本的厚度。默认值为50
-                curveSegments: Integer, (表示文本的)曲线上点的数量，默认值为12
-                bevelEnabled: Boolean, 是否开启斜角，默认为false
-                bevelThickness: Float, 文本上斜角的深度，默认值为20
-                bevelSize: Float, 斜角与原始文本轮廓之间的延伸距离, 默认值为8
-                bevelSegments: Integer, 斜角的分段数, 默认值为3
-                */
-          });
-          var material_text = new THREE.MeshLambertMaterial({
-            color: 0x9933ff,
-          });
-          /*
-            定义可以反光的材料, 
-            也可以使用MeshBasicMeterial, 
-            只是对光源无效
-            0x9933FF是十六进制颜色名
-            */
-          var text_1 = new THREE.Mesh(new_text, material_text);
-          //创建文字
-          scene.add(text_1);
-          //添加文字
-          text_1.position.z = 50;
-          text_1.position.y = -50;
-          text_1.position.x = 50;
-        }
-      );
+      // var loader = new THREE.FontLoader(); //开始创建文字
+      // loader.load(
+      //   "src/three/examples/fonts/STSong_Regular.json",
+      //   function (font) {
+      //     //上面导入了optimer_regular.typeface.json
+      //     var new_text = new THREE.TextGeometry("坎", {
+      //       font: font,
+      //       size: 10,
+      //       height: 0.3,
+      //     });
+      //     var material_text = new THREE.MeshLambertMaterial({
+      //       color: 0x9933ff,
+      //     });
+      //     /*
+      //       定义可以反光的材料,
+      //       也可以使用MeshBasicMeterial,
+      //       只是对光源无效
+      //       0x9933FF是十六进制颜色名
+      //       */
+      //     var text_1 = new THREE.Mesh(new_text, material_text);
+      //     //创建文字
+      //     scene.add(text_1);
+      //     //添加文字
+      //     text_1.position.z = -50;
+      //     text_1.position.y = 50;
+      //     text_1.position.x = -50;
+      //   }
+      // );
 
-      var loader = new THREE.FontLoader(); //开始创建文字
-      loader.load(
-        "src/three/examples/fonts/STSong_Regular.json",
-        function (font) {
-          //上面导入了optimer_regular.typeface.json
-          var new_text = new THREE.TextGeometry("震", {
-            font: font,
-            size: 10,
-            height: 0.3,
-          });
-          var material_text = new THREE.MeshLambertMaterial({
-            color: 0x9933ff,
-          });
-          /*
-            定义可以反光的材料, 
-            也可以使用MeshBasicMeterial, 
-            只是对光源无效
-            0x9933FF是十六进制颜色名
-            */
-          var text_1 = new THREE.Mesh(new_text, material_text);
-          //创建文字
-          scene.add(text_1);
-          //添加文字
-          text_1.position.z = -50;
-          text_1.position.y = -50;
-          text_1.position.x = 50;
-        }
-      );
+      // var loader = new THREE.FontLoader(); //开始创建文字
+      // loader.load(
+      //   "src/three/examples/fonts/STSong_Regular.json",
+      //   function (font) {
+      //     //上面导入了optimer_regular.typeface.json
+      //     var new_text = new THREE.TextGeometry("艮", {
+      //       font: font,
+      //       size: 10,
+      //       height: 0.3,
+      //     });
+      //     var material_text = new THREE.MeshLambertMaterial({
+      //       color: 0x9933ff,
+      //     });
+      //     /*
+      //       定义可以反光的材料,
+      //       也可以使用MeshBasicMeterial,
+      //       只是对光源无效
+      //       0x9933FF是十六进制颜色名
+      //       */
+      //     var text_1 = new THREE.Mesh(new_text, material_text);
+      //     //创建文字
+      //     scene.add(text_1);
+      //     //添加文字
+      //     text_1.position.z = 50;
+      //     text_1.position.y = -50;
+      //     text_1.position.x = -50;
+      //   }
+      // );
 
-      var loader = new THREE.FontLoader(); //开始创建文字
-      loader.load(
-        "src/three/examples/fonts/STSong_Regular.json",
-        function (font) {
-          //上面导入了optimer_regular.typeface.json
-          var new_text = new THREE.TextGeometry("巽", {
-            font: font,
-            size: 10,
-            height: 0.3,
-          });
-          var material_text = new THREE.MeshLambertMaterial({
-            color: 0x9933ff,
-          });
-          /*
-            定义可以反光的材料, 
-            也可以使用MeshBasicMeterial, 
-            只是对光源无效
-            0x9933FF是十六进制颜色名
-            */
-          var text_1 = new THREE.Mesh(new_text, material_text);
-          //创建文字
-          scene.add(text_1);
-          //添加文字
-          text_1.position.z = 50;
-          text_1.position.y = 50;
-          text_1.position.x = -50;
-        }
-      );
-
-      var loader = new THREE.FontLoader(); //开始创建文字
-      loader.load(
-        "src/three/examples/fonts/STSong_Regular.json",
-        function (font) {
-          //上面导入了optimer_regular.typeface.json
-          var new_text = new THREE.TextGeometry("坎", {
-            font: font,
-            size: 10,
-            height: 0.3,
-          });
-          var material_text = new THREE.MeshLambertMaterial({
-            color: 0x9933ff,
-          });
-          /*
-            定义可以反光的材料, 
-            也可以使用MeshBasicMeterial, 
-            只是对光源无效
-            0x9933FF是十六进制颜色名
-            */
-          var text_1 = new THREE.Mesh(new_text, material_text);
-          //创建文字
-          scene.add(text_1);
-          //添加文字
-          text_1.position.z = -50;
-          text_1.position.y = 50;
-          text_1.position.x = -50;
-        }
-      );
-
-      var loader = new THREE.FontLoader(); //开始创建文字
-      loader.load(
-        "src/three/examples/fonts/STSong_Regular.json",
-        function (font) {
-          //上面导入了optimer_regular.typeface.json
-          var new_text = new THREE.TextGeometry("艮", {
-            font: font,
-            size: 10,
-            height: 0.3,
-          });
-          var material_text = new THREE.MeshLambertMaterial({
-            color: 0x9933ff,
-          });
-          /*
-            定义可以反光的材料, 
-            也可以使用MeshBasicMeterial, 
-            只是对光源无效
-            0x9933FF是十六进制颜色名
-            */
-          var text_1 = new THREE.Mesh(new_text, material_text);
-          //创建文字
-          scene.add(text_1);
-          //添加文字
-          text_1.position.z = 50;
-          text_1.position.y = -50;
-          text_1.position.x = -50;
-        }
-      );
-
-      var loader = new THREE.FontLoader(); //开始创建文字
-      loader.load(
-        "src/three/examples/fonts/STSong_Regular.json",
-        function (font) {
-          //上面导入了optimer_regular.typeface.json
-          var new_text = new THREE.TextGeometry("坤", {
-            font: font,
-            size: 10,
-            height: 0.3,
-          });
-          var material_text = new THREE.MeshLambertMaterial({
-            color: 0x9933ff,
-          });
-          var text_1 = new THREE.Mesh(new_text, material_text);
-          //创建文字
-          scene.add(text_1);
-          //添加文字
-          text_1.position.z = -50;
-          text_1.position.y = -50;
-          text_1.position.x = -50;
-        }
-      );
+      // var loader = new THREE.FontLoader(); //开始创建文字
+      // loader.load(
+      //   "src/three/examples/fonts/STSong_Regular.json",
+      //   function (font) {
+      //     //上面导入了optimer_regular.typeface.json
+      //     var new_text = new THREE.TextGeometry("坤", {
+      //       font: font,
+      //       size: 10,
+      //       height: 0.3,
+      //     });
+      //     var material_text = new THREE.MeshLambertMaterial({
+      //       color: 0x9933ff,
+      //     });
+      //     var text_1 = new THREE.Mesh(new_text, material_text);
+      //     //创建文字
+      //     scene.add(text_1);
+      //     //添加文字
+      //     text_1.position.z = -50;
+      //     text_1.position.y = -50;
+      //     text_1.position.x = -50;
+      //   }
+      // );
 
       var axesHelper = new THREE.AxesHelper(200);
       scene.add(axesHelper);
@@ -370,7 +359,7 @@ export default defineComponent({
       controls.addEventListener("change", render);
     };
 
-    return { count,change };
+    return { count, change };
   },
 });
 </script>
