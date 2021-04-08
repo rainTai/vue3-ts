@@ -1,14 +1,16 @@
 <template>
   <div>
     about
-    <el-button>my button</el-button>
+    <el-button @click="setStateName('bbb')">my button</el-button>
     <!-- {{name}} -->
-    {{ name1 }}
+    {{ name }} 年龄{{ age }}
+
+    <div>{{people.name}}{{people.age}}</div>
   </div>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from "vue";
+import { ref, defineComponent,reactive,computed } from "vue";
 import { useStore } from "vuex";
 export default defineComponent({
   name: "HelloWorld",
@@ -21,11 +23,30 @@ export default defineComponent({
   setup: () => {
     const count = ref(0);
     const store = useStore();
-    const name: string = ref(store.state.name);
-    const name1: string = store.state.name;
-    console.log(store.state);
+    let name: ageObject = computed(() => store.state.name);
+    interface ageObject {
+      value: number;
+    }
+    let age: ageObject = ref(20);
+    interface People {
+      name: string;
+      age: number;
+      sex?: string;
+      like?: string;
+    }
+    let people: People = reactive({
+      name: "justin",
+      age: 11,
+    });
+    console.log(age);
+    function setStateName(name) {
+      store.dispatch("setStateName", name);
+      age.value = 30;
+      people.name = "abc";
+      people.age+=1;
+    }
     const option = {};
-    return { count, name, name1, option };
+    return { count, name, age, people,option, setStateName };
   },
 });
 </script>

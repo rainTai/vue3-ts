@@ -2,11 +2,19 @@ import { createStore } from "vuex";
 
 const store = createStore({
   state: {
-    name:"zhuda"
+    name: "zhuda",
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    setStateName(state, payload) {
+      state.name = payload;
+    },
+  },
+  actions: {
+    setStateName(context,name){
+      context.commit('setStateName',name)
+    }
+  },
   modules: {},
 });
 
-export default store
+export default store;
